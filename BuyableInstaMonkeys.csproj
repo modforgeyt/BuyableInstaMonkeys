@@ -8,7 +8,6 @@
         <LangVersion>preview</LangVersion>
         <Optimize>False</Optimize>
         <DebugType>embedded</DebugType>
-        <!-- Keep this project's explicit BTD6 Run/Debug profile instead of overwriting it from the shared template. -->
         <DontCopyLaunchSettings>true</DontCopyLaunchSettings>
     </PropertyGroup>
     <ItemGroup>

@@ -1,11 +1,9 @@
 [package]
-name = "BuyableInstaMonkeys" # The Thunderstore package name. This should usually match your mod name (no spaces).
-namespace = "modforgeyt" # The Thunderstore team that owns the package. Create this team on Thunderstore first.
-description = "" # Short description shown on Thunderstore package listings. Max 256 characters
-websiteUrl = "" # Optional project URL shown on Thunderstore. Your GitHub repository is a good default.
+name = "BuyableInstaMonkeys"
+namespace = "modforgeyt"
+description = ""
+websiteUrl = ""
 
-# Thunderstore package dependencies use the format Namespace-PackageName = "version".
-# Versions listed are minimums, not exact requirements, so it's ok if you don't change these frequenty
 [package.dependencies]
 LavaGang-MelonLoader = "0.7.3"
 doombubbles-Btd6ModHelper = "3.6.5"
@@ -15,7 +13,7 @@ icon = "./Icon.png"
 readme = "./README.md"
 outdir = "bin"
 
-[[build.copy]] # Make sure this matches your mod's dll name
+[[build.copy]]
 source = "./bin/Release/BuyableInstaMonkeys.dll"
 target = "BuyableInstaMonkeys.dll"
 

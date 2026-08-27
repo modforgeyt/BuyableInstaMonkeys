@@ -23,7 +23,6 @@ public class BuyableInstaMonkeys : BloonsTD6Mod
 {
     internal const int RandomTierZeroPrice = 100;
 
-    // These are base tower IDs used by BTD6's player profile.
     private static readonly string[] TowerIds =
     {
         "DartMonkey", "BoomerangMonkey", "BombShooter", "TackShooter", "IceMonkey", "GlueGunner",
@@ -54,8 +53,6 @@ public class BuyableInstaMonkeys : BloonsTD6Mod
         {
             Tiers = tiers;
 
-            // 0-0-0 has weight 256, one upgrade has 128, two upgrades has 64, etc.
-            // This makes every higher-tier Insta less likely than the one before it.
             Weight = 1 << (8 - (tiers[0] + tiers[1] + tiers[2]));
         }
     }
@@ -99,7 +96,6 @@ public class BuyableInstaMonkeys : BloonsTD6Mod
         player.AddInstaTower(towerId, new Il2CppStructArray<int>(tiers), 1);
         player.SaveNow();
 
-        // The built-in screen owns the count and collection UI, so refresh it after every purchase.
         screen.UpdateTypesCounts();
         ModHelper.Msg<BuyableInstaMonkeys>($"Bought a {towerId} {tiers[0]}-{tiers[1]}-{tiers[2]} Insta Monkey for {offer.Price} Monkey Money.");
     }
@@ -111,16 +107,12 @@ public class BuyableInstaMonkeys : BloonsTD6Mod
 
         void AddOption(int[] tiers)
         {
-            // Two low-tier paths can be described in either order while generating.
-            // Only add each actual 3-number Insta combination once.
             if (seen.Add($"{tiers[0]}-{tiers[1]}-{tiers[2]}"))
                 options.Add(new InstaOption(tiers));
         }
 
         AddOption(new[] { 0, 0, 0 });
 
-        // An Insta can have one main path at tier 1-5 and one crosspath at tier 0-2.
-        // Generate every legal combination without allowing upgrades on all three paths.
         for (var mainPath = 0; mainPath < 3; mainPath++)
         {
             for (var mainTier = 1; mainTier <= 5; mainTier++)
@@ -170,7 +162,7 @@ public class BuyableInstaMonkeys : BloonsTD6Mod
                 return option.Tiers;
         }
 
-        return new[] { 0, 0, 0 }; // Unreachable, but keeps the method safe if the pool changes.
+        return new[] { 0, 0, 0 };
     }
 
     private static int GetMainTier(int[] tiers) => Mathf.Max(tiers[0], Mathf.Max(tiers[1], tiers[2]));
@@ -182,7 +174,6 @@ internal static class InstaTowerScreenAwakePatch
     [HarmonyPostfix]
     private static void Postfix(InstaTowerScreen __instance)
     {
-        // Awake can run again when returning to this screen. Keep exactly one stack of mod buttons.
         if (__instance.collectionViewToggle.transform.parent.Find("BuyableInstaMonkeysButton") != null)
             return;
 
@@ -205,10 +196,7 @@ internal static class InstaTowerScreenAwakePatch
                 label.text = offer.Label;
 
             var rect = buttonObject.GetComponent<RectTransform>();
-            // The original collection button is much taller than a shop row. Shrink each
-            // cloned row and leave a clear gap so the card artwork never overlaps.
             rect.localScale = new Vector3(0.35f, 0.35f, 1f);
-            // Two columns keep all purchase choices reachable without a long overlapping stack.
             var column = index % 2;
             var row = index / 2;
             var xOffset = column == 0 ? -240f : 40f;
@@ -216,8 +204,6 @@ internal static class InstaTowerScreenAwakePatch
 
             if (label != null)
             {
-                // Give each label its own position below the icon, in the same parent as
-                // all card buttons, so it cannot be covered by a later card.
                 var labelRect = label.GetComponent<RectTransform>();
                 label.transform.SetParent(__instance.collectionViewToggle.transform.parent, false);
                 labelRect.anchorMin = rect.anchorMin;
@@ -241,7 +227,6 @@ internal static class InstaTowerScreenAwakePatch
             }));
         }
 
-        // Ensure every detached text label is drawn after (above) all card icons.
         foreach (var labelTransform in labels)
             labelTransform.SetAsLastSibling();
     }
