@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>BuyableInstaMonkeys</RootNamespace>
+        <Configurations>Debug;Release</Configurations>
+        <Nullable>enable</Nullable>
+        <AssemblyName>BuyableInstaMonkeys</AssemblyName>
+        <LangVersion>preview</LangVersion>
+        <Optimize>False</Optimize>
+        <DebugType>embedded</DebugType>
+        <!-- Keep this project's explicit BTD6 Run/Debug profile instead of overwriting it from the shared template. -->
+        <DontCopyLaunchSettings>true</DontCopyLaunchSettings>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include=".github\workflows\build.yml" />
+    </ItemGroup>
+
+    <Import Project="..\btd6.targets" />
+</Project>

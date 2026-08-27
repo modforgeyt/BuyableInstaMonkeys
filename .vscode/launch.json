@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch BTD6 with Buyable Insta Monkeys",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "D:\\epic\\BloonsTD6\\BloonsTD6.exe",
+      "args": [
+        "moddingDev",
+        "--melonloader.debug"
+      ],
+      "cwd": "D:\\epic\\BloonsTD6",
+      "console": "internalConsole",
+      "stopAtEntry": false
+    }
+  ]
+}
