@@ -15,7 +15,4 @@ Adds purchase buttons to the Insta Monkey menu:
 Random Instas can use every legal upgrade-path combination. Every additional
 upgrade tier halves its chance.
 
-Features a GitHub actions setup to automatically build the mod whenever commits are pushed,
-and publish a release if a tag is pushed (using the LATEST.md as the body).
-
 [![Requires BTD6 Mod Helper](https://raw.githubusercontent.com/gurrenm3/BTD-Mod-Helper/master/banner.png)](https://github.com/gurrenm3/BTD-Mod-Helper#readme)
