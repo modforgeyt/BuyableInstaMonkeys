@@ -1,5 +1,6 @@
 global using BTD_Mod_Helper.Extensions;
 using HarmonyLib;
+using BTD_Mod_Helper.Api;
 using Il2CppAssets.Scripts.Models.Profile;
 using Il2CppAssets.Scripts.Unity;
 using Il2CppAssets.Scripts.Unity.UI_New.Main.PowersSelect;
@@ -86,6 +87,7 @@ public class BuyableInstaMonkeys : BloonsTD6Mod
 
         if (player.GetMonkeyMoney() < offer.Price)
         {
+            Game.instance.audioFactory.PlaySoundFromUnity(screen.click1Sound, "BuyableInstaMonkeysNoMoney");
             ModHelper.Msg<BuyableInstaMonkeys>("Not enough Monkey Money to buy an Insta Monkey.");
             return;
         }
@@ -95,6 +97,7 @@ public class BuyableInstaMonkeys : BloonsTD6Mod
         player.SpendMonkeyMoney(offer.Price, "Buyable Insta Monkey");
         player.AddInstaTower(towerId, new Il2CppStructArray<int>(tiers), 1);
         player.SaveNow();
+        ModContent.GetAudioClip<BuyableInstaMonkeys>("UIGetGold").Play("BuyableInstaMonkeysPurchase");
 
         screen.UpdateTypesCounts();
         ModHelper.Msg<BuyableInstaMonkeys>($"Bought a {towerId} {tiers[0]}-{tiers[1]}-{tiers[2]} Insta Monkey for {offer.Price} Monkey Money.");
@@ -166,6 +169,7 @@ public class BuyableInstaMonkeys : BloonsTD6Mod
     }
 
     private static int GetMainTier(int[] tiers) => Mathf.Max(tiers[0], Mathf.Max(tiers[1], tiers[2]));
+
 }
 
 [HarmonyPatch(typeof(InstaTowerScreen), nameof(InstaTowerScreen.Awake))]
