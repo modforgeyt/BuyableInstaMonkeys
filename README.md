@@ -8,7 +8,7 @@ Buyable Insta Monkeys
 
 Adds purchase buttons to the Insta Monkey menu:
 
-- Random weighted Insta: 1,250 Monkey Money
+- Random weighted Insta: 250 Monkey Money
 - 0-0-0 Insta: 125 Monkey Money
 - Tier 1 / 2 / 3 / 4 / 5 cost: 250 / 500 / 1,250 / 2,500 / 5,000 Monkey Money
 

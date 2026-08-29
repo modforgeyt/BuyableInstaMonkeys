@@ -37,7 +37,7 @@ public class BuyableInstaMonkeys : BloonsTD6Mod
 
     internal static readonly StoreOffer[] StoreOffers =
     {
-        new("RANDOM 1250 MM", 1250),
+        new("RANDOM 250 MM", 250),
         new("0-0-0 125 MM", 125, new[] { 0, 0, 0 }),
         new("T1 250 MM", 250, tier: 1),
         new("T2 500 MM", 500, tier: 2),
